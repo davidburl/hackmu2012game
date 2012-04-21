@@ -1,20 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.78" >
+        android:orientation="horizontal" android:layout_marginLeft="10px" android:layout_marginRight="10px" android:layout_marginTop="10px" android:layout_marginBottom="10px">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="244dp" >
+            android:layout_height="match_parent"
+            android:layout_weight=".50"
+            android:clickable="false"
+            android:clipChildren="true" android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/enemyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enemy Name" />
+
+            <ProgressBar
+                android:id="@+id/enemyHealth"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent" />
 
         </LinearLayout>
-    </ScrollView>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:src="@drawable/user_male" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_margin="20px">
+
+        <ImageView
+            android:id="@+id/playerImage"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:src="@drawable/user_male" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical" android:layout_weight=".5">
+
+            <TextView
+                android:id="@+id/playerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Player Name" />
+
+            <ProgressBar
+                android:id="@+id/playerHealth"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtProg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time Left:" android:layout_marginLeft="20px"/>
+
+    <ProgressBar
+        android:id="@+id/timeLeft"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px" android:layout_marginBottom="20px"/>
+
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What is the captial of Matthewland?"
+        android:textAppearance="?android:attr/textAppearanceMedium" android:layout_marginLeft="20px" android:layout_marginRight="20px"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="20px" >
+
+            <Button
+                android:id="@+id/answerOne"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight=".5"
+                android:text="DAVIDVILLE!" />
+
+            <Button
+                android:id="@+id/answerTwo"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight=".5"
+                android:text="Button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/answerThree"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight=".5"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/answerFour"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight=".5"
+                android:text="Button" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:text="Store:"
+            android:textAppearance="?android:attr/textAppearanceMedium" android:layout_marginRight="10px"/>
+
+        <TextView
+            android:id="@+id/playerPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/ptsTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" points" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/moreHP"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text=" + Time ( 1 point )" android:layout_weight=".5"/>
+
+        <Button
+            android:id="@+id/moreHP"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="+ HP ( 1 point )" android:layout_weight=".5"/>
+
+    </LinearLayout>
 
 </LinearLayout>
