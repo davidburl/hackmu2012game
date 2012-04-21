@@ -6,12 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 
 public class Hackmu2012Activity extends Activity implements OnClickListener {
 	
-	Button answerOne, answerTwo, answerThree, answerFour, storeOne, storeTwo;
-
+	Button answerOneB, answerTwoB, answerThreeB, answerFourB, storeOneB, storeTwoB;
+	ProgressBar enemyHealthPB, playerHealthPB, timeLeftPB;
 	
     /** Called when the activity is first created. */
     @Override
@@ -19,13 +20,21 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        answerOne = (Button)findViewById(R.id.answerOne);
-        answerTwo = (Button)findViewById(R.id.answerTwo);
-        answerThree = (Button)findViewById(R.id.answerThree);
-        answerFour = (Button)findViewById(R.id.answerFour);
+        answerOneB = (Button)findViewById(R.id.answerOne);
+        answerTwoB = (Button)findViewById(R.id.answerTwo);
+        answerThreeB = (Button)findViewById(R.id.answerThree);
+        answerFourB = (Button)findViewById(R.id.answerFour);
         
+        enemyHealthPB = (ProgressBar)findViewById(R.id.enemyHealth);
+        playerHealthPB = (ProgressBar)findViewById(R.id.playerHealth);
         
-        answerOne.setOnClickListener(this);
+        answerOneB.setOnClickListener(this);
+        answerTwoB.setOnClickListener(this);
+        answerThreeB.setOnClickListener(this);
+        answerFourB.setOnClickListener(this);
+        
+        enemyHealthPB.setMax(100);
+        enemyHealthPB.setProgress(50);
     }
     
    
