@@ -9,7 +9,7 @@ public class Problem {
 
 	public Problem()	{
 		isCorrect = false;
-		
+		 
 		seconds = 10;
 		
 		question = new String("Which name is the best?");
