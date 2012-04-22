@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -27,7 +28,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	private Handler pHHandler = new Handler();
 	private Handler eHHandler = new Handler();
 	private Runnable updateProgress, playerHealthProgress, enemyHealthProgress;
-	TextView timerText, question, playerPoints;
+	TextView timerText, question, playerPoints, enemyName;
 	Button answerOneB, answerTwoB, answerThreeB, answerFourB, storeOneB,
 			storeTwoB;
 	ProgressBar enemyHealthPB, playerHealthPB, timeLeftPB;
@@ -40,6 +41,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	private Player player;
 	private int integralPoints;
 	private int currentTime;
+	private ImageView enemyIcon;
 	//
 	
 	// animatedHealth: the health currently displayed by the progress bar
@@ -108,6 +110,8 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		
 		question = (TextView) findViewById(R.id.questionText);
 		playerPoints = (TextView) findViewById(R.id.playerPoints);
+		enemyName = (TextView) findViewById(R.id.enemyName);
+		enemyIcon = (ImageView) findViewById(R.id.imageView1);
 		
 		answerOneB = (Button) findViewById(R.id.answerOne);
 		answerTwoB = (Button) findViewById(R.id.answerTwo);
@@ -137,6 +141,8 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		player = new Player();
 		updateButtons();
 		integralPoints = 0;
+		enemyName.setText(enemy.getName());
+		enemyIcon.setImageResource(enemy.getIconID());
 		//
 		
 		startTimer();
@@ -222,6 +228,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 				
 				if(questionNumber == 4){
 					enemy = new TrigEnemy();
+					enemyName.setText(enemy.getName());
 					enemyHealthPB.setProgress(enemy.getHP()*100);
 					
 					secondsLeft = enemy.getProblems()[0].getTime() * 10;
@@ -299,6 +306,8 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 					enemy = new TrigEnemy();
 					enemyHealthPB.setProgress(enemy.getHP()*100);
 					integralPoints = player.getPoints();
+					enemyIcon.setImageResource(enemy.getIconID());
+					enemyName.setText(enemy.getName());
 				}
 				problemNumber = questionNumber - 4;
 			}
@@ -314,19 +323,22 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 
 	public void questionWrong(boolean timeExpired) {
 		changePlayerHealth(player.getCurrentHP() - 5); // lost lots of points for not being able to answer in time.
+		questionNumber++;
 		if(questionNumber < 4){
+			
 			secondsLeft = enemy.getProblems()[questionNumber].getTime() * 10;
-			questionNumber++;
+			
 			/*
 			if(questionNumber == 4){
 				enemy = new TrigEnemy();
 			}*/
-			updateButtons();
+			
 		}
 		else if(questionNumber <= 7){
 			secondsLeft = enemy.getProblems()[questionNumber - 4].getTime() * 10;
 		}
 		
+		updateButtons();
 		startTimer();
 	}
 	

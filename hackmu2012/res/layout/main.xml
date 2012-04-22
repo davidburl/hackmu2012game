@@ -36,7 +36,7 @@
             android:id="@+id/imageView1"
             android:layout_width="100px"
             android:layout_height="100px"
-            android:src="@drawable/user_male" />
+            android:src="@drawable/trig_force"/>
 
     </LinearLayout>
 

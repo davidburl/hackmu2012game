@@ -22,6 +22,8 @@ public class TrigEnemy implements Enemy {
 		
 		maxHp = 4;
 		currHp = 4;
+		
+		mIconID = R.drawable.trig_force;
 	}
 
 	public Problem[] getProblems() {

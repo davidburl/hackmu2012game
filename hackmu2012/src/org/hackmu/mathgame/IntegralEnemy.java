@@ -22,7 +22,7 @@ public class IntegralEnemy implements Enemy {
 		
 		name = "Integral";
 		
-		//iconID = R.id.integralImage;
+		iconID = R.drawable.trogdor_integral;
 	}
 	
 	public Problem[] getProblems(){

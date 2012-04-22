@@ -3,8 +3,8 @@ package org.hackmu.mathgame;
 public class Player {
 	private int mPoints = 0;
 	private int mIconID = R.id.playerImage;
-	private int mCurrentHP = 100;
-	private int mMaxHP = 100;
+	private int mCurrentHP = 20;
+	private int mMaxHP = 20;
 
 	public Player() {
 		// nothing
@@ -16,6 +16,10 @@ public class Player {
 	
 	public void setPoints(int newPoints) {
 		this.mPoints = newPoints;
+		
+		if(this.mPoints < 0){
+			this.mPoints = 0;
+		}
 	}
 
 	public int getIconID() {
