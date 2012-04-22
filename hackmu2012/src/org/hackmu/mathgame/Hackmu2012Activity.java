@@ -53,7 +53,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
 
 		updateProgress = new Runnable() {
@@ -361,7 +361,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 			Log.d("MATH", "Trig Score" + (player.getPoints() - integralPoints) + "/ 42 =" + trigScore);
 			Log.d("MATH", "Integral " + (integralPoints) + "/ 20 = " + intScore);
 			
-			Intent resultWin = new Intent(Hackmu2012Activity.this, results.class);
+			Intent resultWin = new Intent(Hackmu2012Activity.this, Results.class);
 			Bundle b = new Bundle();
 			b.putDouble("overall", overall);
 			b.putDouble("trig", trigScore);

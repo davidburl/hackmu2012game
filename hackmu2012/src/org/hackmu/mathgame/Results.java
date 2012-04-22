@@ -7,7 +7,7 @@ import android.widget.ProgressBar;
 
 
 
-public class results extends Activity {
+public class Results extends Activity {
 	
 	ProgressBar overall, trig, integral;
 	
@@ -15,7 +15,7 @@ public class results extends Activity {
 	{
 	        super.onCreate(savedInstanceState);
 	        
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
+			//requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 	        
 			setContentView(R.layout.results);
