@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-
+// Yoshi WILL rule the world.  There is no escape...
 public class Hackmu2012Activity extends Activity implements OnClickListener {
 	
 	public final static int ONE_SECOND = 1000;	
