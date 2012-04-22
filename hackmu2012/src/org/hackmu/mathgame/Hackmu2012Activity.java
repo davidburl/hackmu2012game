@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -28,6 +29,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	//
 	private int questionNumber;
 	private Enemy enemy;
+	private Player player;
 	//
 
 	/** Called when the activity is first created. */
@@ -75,8 +77,11 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		storeTwoB.setOnClickListener(this);
 
 		// 
+		Log.d("Math","start");
 		questionNumber = 0;
 		enemy = new IntegralEnemy();
+		player = new Player();
+		updateButtons();
 		//
 		
 		startTimer();
@@ -123,7 +128,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 				updateButtons();
 				
 				if(questionNumber == 4){
-					enemy = new TrigEnemy();
+					//enemy = new TrigEnemy();
 					secondsLeft = enemy.getProblems()[0].getTime() * 10;
 				}
 				else{
@@ -156,7 +161,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	}
 	
 	public void purchasedHP() {
-		player.setHP(player.getHP() + 5);
+		player.setCurrentHP(player.getCurrentHP() + 5);
 	}
 	
 	///////////////////////////
@@ -182,12 +187,12 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	}
 
 	public void questionWrong(boolean timeExpired) {
-		player.setHP(player.getHP() - 5); // lost lots of points for not being able to answer in time.
+		player.setCurrentHP(player.getCurrentHP() - 5); // lost lots of points for not being able to answer in time.
 		if(questionNumber < 4){
 			secondsLeft = enemy.getProblems()[questionNumber].getTime() * 10;
 			questionNumber++;
 			if(questionNumber == 4){
-				enemy = new TrigEnemy();
+				//enemy = new TrigEnemy();
 			}
 			updateButtons();
 		}

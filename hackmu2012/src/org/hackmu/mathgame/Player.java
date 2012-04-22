@@ -31,7 +31,12 @@ public class Player {
 	}
 
 	public void setCurrentHP(int newCurrentHP) {
-		this.mCurrentHP = newCurrentHP;
+		if(newCurrentHP <= mMaxHP){
+			this.mCurrentHP = newCurrentHP;
+		}
+		else {
+			this.mCurrentHP = this.mMaxHP;
+		}
 	}
 	
 	public int getMaxHP() {
