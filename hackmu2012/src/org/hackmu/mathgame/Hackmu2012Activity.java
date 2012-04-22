@@ -8,7 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-
+// Yoshi WILL rule the world.  There is no escape...
 public class Hackmu2012Activity extends Activity implements OnClickListener {
 	
 	Button answerOneB, answerTwoB, answerThreeB, answerFourB, storeOneB, storeTwoB;
