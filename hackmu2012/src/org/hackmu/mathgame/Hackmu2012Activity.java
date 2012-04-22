@@ -1,6 +1,7 @@
 package org.hackmu.mathgame;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -34,7 +35,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 			public void run() {
 
 				if (secondsLeft <= 0) {
-					GameOver(true);
+					questionWrong(true);
 				} else {
 					timerText.setText(Integer.toString((secondsLeft / 10) + 1));
 					secondsLeft--;
@@ -110,12 +111,30 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	}
 	
 	public void purchasedTime() {
-		
+		gameOver();
 	}
 
-	public void GameOver(boolean timeExpired) {
+	public void questionWrong(boolean timeExpired) {
 		secondsLeft = 150;
 		startTimer();
+	}
+	
+	public void gameOver() {
+		double overall = 1;
+		double trigScore = .76;
+		double intScore = .25;
+		
+		Intent resultWin = new Intent(Hackmu2012Activity.this, results.class);
+		Bundle b = new Bundle();
+		b.putDouble("overall", overall);
+		b.putDouble("trig", trigScore);
+		b.putDouble("int", intScore);
+		
+		resultWin.putExtras(b);
+		
+		startActivity(resultWin);
+		
+	
 	}
 
 }
