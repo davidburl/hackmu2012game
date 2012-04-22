@@ -3,7 +3,6 @@ package org.hackmu.mathgame;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,7 +23,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	ProgressBar enemyHealthPB, playerHealthPB, timeLeftPB;
 	
 	
-	int secondsLeft = 5*10;
+	int secondsLeft = 15*10;
 	
     /** Called when the activity is first created. */
     @Override
@@ -69,7 +68,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
     
     // REMEMBER TO RESET secondsLeft before calling this
     public void startTimer() {
-    	timerText.setText(Integer.toString((secondsLeft/10)+1));
+    	
     	timeLeftPB.setMax(secondsLeft);
 		timeLeftPB.setProgress(secondsLeft);
     	mHandler.removeCallbacks(updateProgress);
@@ -81,6 +80,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
     }
     
     public void GameOver(boolean timeExpired) {
+    	secondsLeft = 150;
     	startTimer();
     }
     
