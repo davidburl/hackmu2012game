@@ -228,7 +228,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 				
 			}
 			else{
-				player.setPoints(player.getPoints() - 2);
+				changePlayerHealth(player.getCurrentHP() - 2);
 			}
 		}
 		else if(questionNumber <= 7){
