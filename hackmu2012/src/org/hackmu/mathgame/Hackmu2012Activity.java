@@ -15,10 +15,13 @@ import android.widget.TextView;
 public class Hackmu2012Activity extends Activity implements OnClickListener {
 
 	public final static int ONE_SECOND = 1000;
+	
+	private int modifyBy;
 
 	private Handler mHandler = new Handler();
-	private Runnable updateProgress;
-
+	private Handler pHHandler = new Handler();
+	private Handler eHHandler = new Handler();
+	private Runnable updateProgress, playerHealthProgress, enemyHealthProgress;
 	TextView timerText, question;
 	Button answerOneB, answerTwoB, answerThreeB, answerFourB, storeOneB,
 			storeTwoB;
@@ -31,6 +34,11 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	private Enemy enemy;
 	private Player player;
 	//
+	
+	// animatedHealth: the health currently displayed by the progress bar
+	// It is also a scale of 100 times that of the player health (for smoothness)
+	int animatedPlayerHealth;
+	int animatedEnemyHealth;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -52,6 +60,25 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 			}
 		};
 
+		playerHealthProgress = new Runnable() {
+			public void run() {
+				// modifyBy > 0, we are increasing player HP
+				if(modifyBy > 0) {
+					if((animatedPlayerHealth / 100) <= player.getCurrentHP() ) {
+						animatedPlayerHealth +=modifyBy;
+						playerHealthPB.setProgress(animatedPlayerHealth);
+						pHHandler.postDelayed(this, ONE_SECOND / 100);
+					}
+				} else {
+					if((animatedPlayerHealth / 100) >= player.getCurrentHP() ) {
+						animatedPlayerHealth +=modifyBy;
+						playerHealthPB.setProgress(animatedPlayerHealth);
+						pHHandler.postDelayed(this, ONE_SECOND / 100);
+					}
+				}
+			}
+		};
+		
 		question = (TextView) findViewById(R.id.questionText);
 		
 		answerOneB = (Button) findViewById(R.id.answerOne);
@@ -75,7 +102,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 
 		storeOneB.setOnClickListener(this);
 		storeTwoB.setOnClickListener(this);
-
+		
 		// 
 		questionNumber = 0;
 		enemy = new IntegralEnemy();
@@ -84,6 +111,10 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		//
 		
 		startTimer();
+		
+		playerHealthPB.setMax(player.getMaxHP()*100);
+		playerHealthPB.setProgress(player.getCurrentHP()*100);
+		
 	}
 
 	// REMEMBER TO RESET secondsLeft before calling this
@@ -94,6 +125,26 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		mHandler.removeCallbacks(updateProgress);
 		mHandler.postDelayed(updateProgress, ONE_SECOND / 10);
 	}
+	
+	public void changePlayerHealth(int health) {
+		// update progress to current player health in case we 
+		// were in the process of a transition previously
+		playerHealthPB.setProgress(player.getCurrentHP()*100);
+		pHHandler.removeCallbacks(playerHealthProgress);
+		animatedPlayerHealth = player.getCurrentHP()*100;
+		if(health > player.getCurrentHP()) {
+			modifyBy = 20;
+		} else if(health < player.getCurrentHP()){
+			modifyBy = -20;
+		}
+		player.setCurrentHP(health);
+		mHandler.postDelayed(playerHealthProgress, ONE_SECOND / 100);
+	}
+
+	public void changeEnemyHealth(int health) {
+
+	}
+
 
 	public void onClick(View src) {
 		switch (src.getId()) {
@@ -127,7 +178,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 				updateButtons();
 				
 				if(questionNumber == 4){
-					//enemy = new TrigEnemy();
+					enemy = new TrigEnemy();
 					secondsLeft = enemy.getProblems()[0].getTime() * 10;
 				}
 				else{
@@ -141,26 +192,28 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 				player.setPoints(player.getPoints() - 2);
 			}
 		}
-		else if(questionNumber < 7){
+		else if(questionNumber <= 7){
 			if(answerChosen == enemy.getProblems()[questionNumber - 4].getAnswerID()){
-				player.setPoints(player.getPoints() + secondsLeft/20 + 1);
+				player.setPoints(player.getPoints() + secondsLeft / 20 + 1);
 				questionNumber++;
 				
 				updateButtons();
 				
-				secondsLeft = enemy.getProblems()[questionNumber - 4].getTime() * 10;
-				if(secondsLeft > 0){
-					startTimer();
+				if(questionNumber < 8){
+					secondsLeft = enemy.getProblems()[questionNumber - 4].getTime() * 10;
+					if(secondsLeft > 0){
+						startTimer();
+					}
 				}
 			}
 			else{
-				player.setPoints(player.getPoints() - 2);
+				changePlayerHealth(player.getCurrentHP() - 2);
 			}
 		}
 	}
 	
 	public void purchasedHP() {
-		player.setCurrentHP(player.getCurrentHP() + 5);
+		changePlayerHealth(player.getCurrentHP() + 5);
 	}
 	
 	///////////////////////////
@@ -172,17 +225,26 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	}
 	
 	public void updateButtons(){
-		int problemNumber = questionNumber;
-		if(questionNumber >= 4){
-			problemNumber -= 4;
+		if(questionNumber > 7 || player.getCurrentHP() <= 0){
+			gameOver();
 		}
-		answerOneB.setText(enemy.getProblems()[problemNumber].getAnswer(0));
-		answerTwoB.setText(enemy.getProblems()[problemNumber].getAnswer(1));
-		answerThreeB.setText(enemy.getProblems()[problemNumber].getAnswer(2));
-		answerFourB.setText(enemy.getProblems()[problemNumber].getAnswer(3));
-		
-		question.setText(enemy.getProblems()[problemNumber].getQuestion());
-		
+		else{
+			int problemNumber;
+			
+			if(questionNumber < 4){
+				problemNumber = questionNumber;
+			}
+			else{
+				enemy = new TrigEnemy();
+				problemNumber = questionNumber - 4;
+			}
+			answerOneB.setText(enemy.getProblems()[problemNumber].getAnswer(0));
+			answerTwoB.setText(enemy.getProblems()[problemNumber].getAnswer(1));
+			answerThreeB.setText(enemy.getProblems()[problemNumber].getAnswer(2));
+			answerFourB.setText(enemy.getProblems()[problemNumber].getAnswer(3));
+			
+			question.setText(enemy.getProblems()[problemNumber].getQuestion());
+		}
 	}
 
 	public void questionWrong(boolean timeExpired) {
@@ -191,15 +253,15 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 			secondsLeft = enemy.getProblems()[questionNumber].getTime() * 10;
 			questionNumber++;
 			if(questionNumber == 4){
-				//enemy = new TrigEnemy();
+				enemy = new TrigEnemy();
 			}
 			updateButtons();
 		}
-		else if(questionNumber < 7){
+		else if(questionNumber <= 7){
 			secondsLeft = enemy.getProblems()[questionNumber - 4].getTime() * 10;
 		}
 		else	{
-			secondsLeft = 100;
+			gameOver();
 		}
 		startTimer();
 	}
