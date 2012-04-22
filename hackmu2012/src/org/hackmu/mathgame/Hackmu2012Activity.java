@@ -79,6 +79,25 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 			}
 		};
 		
+		enemyHealthProgress = new Runnable() {
+			public void run() {
+				// modifyBy > 0, we are increasing player HP
+				if(modifyBy > 0) {
+					if((animatedEnemyHealth / 100) <= enemy.getHP() ) {
+						animatedEnemyHealth += modifyBy;
+						enemyHealthPB.setProgress(animatedEnemyHealth);
+						eHHandler.postDelayed(this, ONE_SECOND / 100);
+					}
+				} else {
+					if((animatedEnemyHealth / 100) >= enemy.getHP() ) {
+						animatedEnemyHealth +=modifyBy;
+						enemyHealthPB.setProgress(animatedEnemyHealth);
+						eHHandler.postDelayed(this, ONE_SECOND / 100);
+					}
+				}
+			}
+		};
+		
 		question = (TextView) findViewById(R.id.questionText);
 		
 		answerOneB = (Button) findViewById(R.id.answerOne);
@@ -113,7 +132,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		startTimer();
 		
 		playerHealthPB.setMax(player.getMaxHP()*100);
-		playerHealthPB.setProgress(player.getCurrentHP()*100);
+		playerHealthPB.setProgress(player.getMaxHP()*100);
 		
 	}
 
@@ -142,7 +161,16 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	}
 
 	public void changeEnemyHealth(int health) {
-
+		enemyHealthPB.setProgress(enemy.getHP()*100);
+		pHHandler.removeCallbacks(enemyHealthProgress);
+		animatedEnemyHealth = enemy.getHP()*100;
+		if(health > enemy.getHP()) {
+			modifyBy = 20;
+		} else if(health < enemy.getHP()){
+			modifyBy = -20;
+		}
+		enemy.setHP(health);
+		eHHandler.postDelayed(enemyHealthProgress, ONE_SECOND / 100);
 	}
 
 
