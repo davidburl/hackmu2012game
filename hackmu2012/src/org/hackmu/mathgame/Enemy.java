@@ -1,7 +1,10 @@
 package org.hackmu.mathgame;
 
-public class Enemy {
-	//private Problem[] problems;
-	private String name;
-	//private img;
+public interface Enemy {
+	
+	public Problem[] getProblems();
+	
+	public String getName();
+	
+	public int getIconID();
 }
