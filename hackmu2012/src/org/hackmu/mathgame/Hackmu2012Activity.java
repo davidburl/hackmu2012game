@@ -39,7 +39,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
         // to make sure git works
     }
     
-   
+   // hello 
     
     public void onClick(View src) {
     	
