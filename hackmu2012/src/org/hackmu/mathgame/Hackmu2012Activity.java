@@ -19,6 +19,8 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	public final static int ONE_SECOND = 1000;
 	
 	private int modifyBy;
+	
+	private boolean hasEnded = false;
 
 	private Handler mHandler = new Handler();
 	private Handler pHHandler = new Handler();
@@ -136,6 +138,9 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		playerHealthPB.setMax(player.getMaxHP()*100);
 		playerHealthPB.setProgress(player.getMaxHP()*100);
 		
+		enemyHealthPB.setMax(enemy.getMaxHP()*100);
+		enemyHealthPB.setProgress(enemy.getMaxHP()*100);
+		
 	}
 
 	// REMEMBER TO RESET secondsLeft before calling this
@@ -162,6 +167,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		mHandler.postDelayed(playerHealthProgress, ONE_SECOND / 100);
 	}
 
+	
 	public void changeEnemyHealth(int health) {
 		enemyHealthPB.setProgress(enemy.getHP()*100);
 		pHHandler.removeCallbacks(enemyHealthProgress);
@@ -203,12 +209,15 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		if(questionNumber < 4){
 			if(answerChosen == enemy.getProblems()[questionNumber].getAnswerID()){
 				player.setPoints(player.getPoints() + secondsLeft / 20 + 1);
+				changeEnemyHealth(enemy.getHP() - 1);
 				questionNumber++;
 				
 				updateButtons();
 				
 				if(questionNumber == 4){
 					enemy = new TrigEnemy();
+					enemyHealthPB.setProgress(enemy.getHP()*100);
+					
 					secondsLeft = enemy.getProblems()[0].getTime() * 10;
 				}
 				else{
@@ -226,6 +235,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 			if(answerChosen == enemy.getProblems()[questionNumber - 4].getAnswerID()){
 				player.setPoints(player.getPoints() + secondsLeft / 20 + 1);
 				questionNumber++;
+				changeEnemyHealth(enemy.getHP() - 1);
 				
 				updateButtons();
 				
@@ -265,7 +275,10 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 				problemNumber = questionNumber;
 			}
 			else{
-				enemy = new TrigEnemy();
+				if(questionNumber == 4){
+					enemy = new TrigEnemy();
+					enemyHealthPB.setProgress(enemy.getHP()*100);
+				}
 				problemNumber = questionNumber - 4;
 			}
 			answerOneB.setText(enemy.getProblems()[problemNumber].getAnswer(0));
@@ -282,35 +295,39 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		if(questionNumber < 4){
 			secondsLeft = enemy.getProblems()[questionNumber].getTime() * 10;
 			questionNumber++;
+			/*
 			if(questionNumber == 4){
 				enemy = new TrigEnemy();
-			}
+			}*/
 			updateButtons();
 		}
 		else if(questionNumber <= 7){
 			secondsLeft = enemy.getProblems()[questionNumber - 4].getTime() * 10;
 		}
-		else	{
-			gameOver();
-		}
+		
 		startTimer();
 	}
 	
 	public void gameOver() {
-		double overall = player.getPoints();
-		double trigScore = 15;
-		double intScore = 5;
-		
-		Intent resultWin = new Intent(Hackmu2012Activity.this, results.class);
-		Bundle b = new Bundle();
-		b.putDouble("overall", overall);
-		b.putDouble("trig", trigScore);
-		b.putDouble("int", intScore);
-		
-		resultWin.putExtras(b);
-		
-		startActivity(resultWin);
-		
+		if(!hasEnded){
+			hasEnded = true;
+			
+			double overall = player.getPoints();
+			double trigScore = 15;
+			double intScore = 5;
+			
+			Intent resultWin = new Intent(Hackmu2012Activity.this, results.class);
+			Bundle b = new Bundle();
+			b.putDouble("overall", overall);
+			b.putDouble("trig", trigScore);
+			b.putDouble("int", intScore);
+			
+			resultWin.putExtras(b);
+			
+			startActivity(resultWin);
+			
+			finish();
+		}
 	
 	}
 
