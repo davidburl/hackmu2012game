@@ -5,16 +5,12 @@ public class Problem {
 	private boolean isCorrect;
 	private int answerID;
 	private String question;
-	private int[] seconds;
+	private int seconds;
 
 	public Problem()	{
 		isCorrect = false;
 		
-		seconds = new int[4];
-		seconds[0] = 10;
-		seconds[1] = 10;
-		seconds[2] = 10;
-		seconds[3] = 10;
+		seconds = 10;
 		
 		question = new String("Which name is the best?");
 		
@@ -26,14 +22,10 @@ public class Problem {
 		answerID = 1;
 	}
 	
-	public Problem(String question, String answer1, int time1, String answer2, int time2, String answer3, int time3, String answer4, int time4, int answerID)	{
+	public Problem(String question, String answer1, String answer2, String answer3, String answer4, int answerID, int time)	{
 		isCorrect = false;
 		
-		seconds = new int[4];
-		seconds[0] = time1;
-		seconds[1] = time2;
-		seconds[2] = time3;
-		seconds[3] = time4;
+		seconds = time;
 		
 		this.question = question;
 		
