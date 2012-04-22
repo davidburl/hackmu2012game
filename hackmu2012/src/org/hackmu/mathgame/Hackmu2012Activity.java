@@ -352,6 +352,11 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 			double trigScore = (player.getPoints() - integralPoints) / 42.0;
 			double intScore = integralPoints / 20.0;
 			
+			if(trigScore < 0){
+				trigScore = 0.0;
+				overall = integralPoints / MAX_POINTS;
+			}
+			
 			Log.d("MATH","Player Points: " + player.getPoints() + " / " + MAX_POINTS + " = " + overall);
 			Log.d("MATH", "Trig Score" + (player.getPoints() - integralPoints) + "/ 42 =" + trigScore);
 			Log.d("MATH", "Integral " + (integralPoints) + "/ 20 = " + intScore);
