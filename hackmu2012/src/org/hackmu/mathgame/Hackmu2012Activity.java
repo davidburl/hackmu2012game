@@ -35,6 +35,8 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
         
         enemyHealthPB.setMax(100);
         enemyHealthPB.setProgress(50);
+        
+        // to make sure git works
     }
     
    
