@@ -77,7 +77,6 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		storeTwoB.setOnClickListener(this);
 
 		// 
-		Log.d("Math","start");
 		questionNumber = 0;
 		enemy = new IntegralEnemy();
 		player = new Player();
