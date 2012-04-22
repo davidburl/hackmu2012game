@@ -22,7 +22,8 @@ public final class R {
         public static final int enemyHealth=0x7f050001;
         public static final int enemyName=0x7f050000;
         public static final int imageView1=0x7f050002;
-        public static final int moreHP=0x7f050012;
+        public static final int moreHP=0x7f050013;
+        public static final int moreTime=0x7f050012;
         public static final int playerHealth=0x7f050005;
         public static final int playerImage=0x7f050003;
         public static final int playerName=0x7f050004;
