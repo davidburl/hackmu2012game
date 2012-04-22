@@ -1,7 +1,7 @@
 package org.hackmu.mathgame;
 
 public class Player {
-	private int mPoints = 10;
+	private int mPoints = 0;
 	private int mIconID = R.id.playerImage;
 	private int mCurrentHP = 100;
 	private int mMaxHP = 100;

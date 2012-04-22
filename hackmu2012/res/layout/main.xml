@@ -191,13 +191,13 @@
             android:id="@+id/moreTime"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text=" + Time ( 1 point )" android:layout_weight=".5"/>
+            android:text=" + Time ( 5 point )" android:layout_weight=".5"/>
 
         <Button
             android:id="@+id/moreHP"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="+ HP ( 1 point )" android:layout_weight=".5"/>
+            android:text="+ HP ( 10 point )" android:layout_weight=".5"/>
 
     </LinearLayout>
 
