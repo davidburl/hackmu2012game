@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" android:background="@drawable/brushedmetal_oceanblue">
+    android:orientation="vertical" android:background="@drawable/brushedmetal_silver">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,14 +21,14 @@
                 android:id="@+id/enemyName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enemy Name" />
+                android:text="Enemy Name" android:textColor="#232323"/>
 
 
             <ProgressBar
                 android:id="@+id/enemyHealth"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent" />
+                android:layout_height="fill_parent" android:progressDrawable="@drawable/healthprogress"/>
 
         </LinearLayout>
 
@@ -59,13 +59,13 @@
                 android:id="@+id/playerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="David" />
+                android:text="David" android:textColor="#232323"/>
 
             <ProgressBar
                 android:id="@+id/playerHealth"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent" />
+                android:layout_height="fill_parent" android:progressDrawable="@drawable/healthprogress"/>
 
         </LinearLayout>
 
@@ -80,19 +80,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20px"
-            android:text="Time Left:" />
+            android:text="Time Left:" android:textColor="#232323"/>
 
         <TextView
             android:id="@+id/txtTimeLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0" />
+            android:text="0" android:textColor="#232323"/>
 
         <TextView
             android:id="@+id/txtSec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" seconds." />
+            android:text=" seconds." android:textColor="#232323"/>
 
     </LinearLayout>
 
@@ -107,10 +107,10 @@
 
     <TextView
         android:id="@+id/questionText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="What is the captial of Matthewland?"
-        android:textAppearance="?android:attr/textAppearanceMedium" android:layout_marginLeft="20px" android:layout_marginRight="20px"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" android:layout_marginLeft="20px" android:layout_marginRight="20px" android:textColor="#000000"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -167,19 +167,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20px"
             android:text="Store:"
-            android:textAppearance="?android:attr/textAppearanceMedium" android:layout_marginRight="10px"/>
+            android:textAppearance="?android:attr/textAppearanceMedium" android:layout_marginRight="10px" android:textColor="#232323"/>
 
         <TextView
             android:id="@+id/playerPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0" />
+            android:text="0" android:textColor="#232323"/>
 
         <TextView
             android:id="@+id/ptsTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" points" />
+            android:text=" points" android:textColor="#232323"/>
 
     </LinearLayout>
 

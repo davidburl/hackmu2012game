@@ -2,49 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" android:layout_gravity="center_vertical|fill_vertical|center_horizontal|fill_horizontal|center" android:background="@drawable/brushedmetal_oceanblue">
+    android:orientation="vertical" android:layout_gravity="center_vertical|fill_vertical|center_horizontal|fill_horizontal|center" android:background="@drawable/brushedmetal_silver" android:padding="20px">
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Results"
-        android:textAppearance="?android:attr/textAppearanceLarge" android:layout_gravity="center_vertical|center_horizontal"/>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total Percentage" />
-
-    <ProgressBar
-        android:id="@+id/mainProgress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:text="RESULTS"
+        android:textAppearance="?android:attr/textAppearanceLarge" android:layout_gravity="center" android:textColor="#000000" android:paddingLeft="150px" android:paddingBottom="20px"/>
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Trigonometry Score" />
+        android:text="Trigonometry Score" android:textColor="#232323"/>
 
     <ProgressBar
         android:id="@+id/trigProgress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" android:paddingBottom="30px"/>
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Integral Score" />
+        android:text="Integral Score" android:textColor="#232323"/>
 
     <ProgressBar
         android:id="@+id/integralBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" android:paddingBottom="60px"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Percentage"
+        android:textColor="#232323" />
+
+    <ProgressBar
+        android:id="@+id/mainProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:minHeight="60px"/>
 
 </LinearLayout>
