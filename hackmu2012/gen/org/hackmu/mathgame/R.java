@@ -11,9 +11,11 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int ntitled=0x7f020001;
-        public static final int user_male=0x7f020002;
+        public static final int brushedmetal_oceanblue=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int ntitled=0x7f020002;
+        public static final int player_david_avatar=0x7f020003;
+        public static final int user_male=0x7f020004;
     }
     public static final class id {
         public static final int answerFour=0x7f05000e;
