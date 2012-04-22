@@ -5,6 +5,9 @@ public class TrigEnemy implements Enemy {
 	private Problem[] mProblems = new Problem[4];
 	private String mName;
 	private int mIconID;
+	
+	private int maxHp;
+	private int currHp;
 
 	public TrigEnemy() {
 		this.mName = "Trigonometry Triforce";
@@ -16,6 +19,9 @@ public class TrigEnemy implements Enemy {
 				"adjacent / opposite", "nyan / cat", "(arcsin x)^2", 0, 12);
 		this.mProblems[3] = new Problem("(1/2)(a)(b)(sin C) = ?", "Perimeter",
 				"a^2 + b^2", "Area of Triangle", "Yoshi", 2, 42);
+		
+		maxHp = 4;
+		currHp = 4;
 	}
 
 	public Problem[] getProblems() {
@@ -29,4 +35,17 @@ public class TrigEnemy implements Enemy {
 	public int getIconID() {
 		return this.mIconID;
 	}
+	
+	public int getMaxHP() {
+		return maxHp;
+	}
+	
+	public void setHP(int hp) {
+		currHp = hp;
+	}
+	
+	public int getHP() {
+		return currHp;
+	}
+	
 }
