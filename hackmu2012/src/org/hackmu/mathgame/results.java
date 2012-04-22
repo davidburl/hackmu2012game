@@ -21,13 +21,13 @@ public class results extends Activity {
 			trig = (ProgressBar) findViewById(R.id.trigProgress);
 			integral = (ProgressBar) findViewById(R.id.integralBar);
 			
-			overall.setMax(1000);
-			trig.setMax(1000);
-			integral.setMax(1000);
+			overall.setMax((int)Hackmu2012Activity.MAX_POINTS);
+			trig.setMax(42);
+			integral.setMax(20);
 			
-			overall.setProgress((int) (b.getDouble("overall")*1000));
-			trig.setProgress((int) (b.getDouble("trig")*1000));
-			integral.setProgress((int) (b.getDouble("int")*1000));
+			overall.setProgress((int) (b.getDouble("overall") / Hackmu2012Activity.MAX_POINTS * 40));
+			trig.setProgress((int) (b.getDouble("trig") / 42 * 40));
+			integral.setProgress((int) (b.getDouble("int") / 20 * 40));
 
 	}
 }

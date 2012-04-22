@@ -14,6 +14,8 @@ import android.widget.TextView;
 // Yoshi WILL rule the world.  There is no escape...
 public class Hackmu2012Activity extends Activity implements OnClickListener {
 
+	public final static double MAX_POINTS = 62.0;
+	
 	public final static int ONE_SECOND = 1000;
 	
 	private int modifyBy;
@@ -221,7 +223,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	//      fix later        //
 	///////////////////////////
 	public void purchasedTime() {
-		gameOver();
+		secondsLeft += 10;
 	}
 	
 	public void updateButtons(){
@@ -248,7 +250,7 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	}
 
 	public void questionWrong(boolean timeExpired) {
-		player.setCurrentHP(player.getCurrentHP() - 5); // lost lots of points for not being able to answer in time.
+		changePlayerHealth(player.getCurrentHP() - 5); // lost lots of points for not being able to answer in time.
 		if(questionNumber < 4){
 			secondsLeft = enemy.getProblems()[questionNumber].getTime() * 10;
 			questionNumber++;
@@ -267,9 +269,9 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	}
 	
 	public void gameOver() {
-		double overall = 1;
-		double trigScore = .76;
-		double intScore = .25;
+		double overall = player.getPoints();
+		double trigScore = 15;
+		double intScore = 5;
 		
 		Intent resultWin = new Intent(Hackmu2012Activity.this, results.class);
 		Bundle b = new Bundle();
