@@ -164,6 +164,11 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		mHandler.postDelayed(updateProgress, ONE_SECOND / 10);
 	}
 	
+	public void onPause() {
+		super.onPause();
+		mHandler.removeCallbacks(updateProgress);
+	}
+	
 	public void changePlayerHealth(int health) {
 		// update progress to current player health in case we 
 		// were in the process of a transition previously
