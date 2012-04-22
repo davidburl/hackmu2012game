@@ -17,7 +17,7 @@ public class IntegralEnemy implements Enemy {
 		
 		name = "Integral";
 		
-		//iconID = ???;
+		iconID = R.id.integralImage;
 	}
 	
 	public Problem[] getProblems(){

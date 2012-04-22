@@ -63,6 +63,10 @@ public class Problem {
 		return answerID;
 	}
 	
+	public int getTime(){
+		return seconds;
+	}
+	
 	// set question
 	public void setQuestion(String question){
 		this.question = question;
@@ -85,4 +89,7 @@ public class Problem {
 		isCorrect = correct;
 	}
 	
+	public void setTime(int seconds){
+		this.seconds = seconds;
+	}
 }

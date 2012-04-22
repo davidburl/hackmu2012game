@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-//  Yoshi WILL rule the world.  There is no escape... 
+// Yoshi WILL rule the world.  There is no escape...
 public class Hackmu2012Activity extends Activity implements OnClickListener {
 
 	public final static int ONE_SECOND = 1000;
@@ -18,12 +18,17 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	private Handler mHandler = new Handler();
 	private Runnable updateProgress;
 
-	TextView timerText;
+	TextView timerText, question;
 	Button answerOneB, answerTwoB, answerThreeB, answerFourB, storeOneB,
 			storeTwoB;
 	ProgressBar enemyHealthPB, playerHealthPB, timeLeftPB;
 
 	int secondsLeft = 15 * 10;
+	
+	//
+	private int questionNumber;
+	private Enemy enemy;
+	//
 
 	/** Called when the activity is first created. */
 	@Override
@@ -45,6 +50,8 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 			}
 		};
 
+		question = (TextView) findViewById(R.id.questionText);
+		
 		answerOneB = (Button) findViewById(R.id.answerOne);
 		answerTwoB = (Button) findViewById(R.id.answerTwo);
 		answerThreeB = (Button) findViewById(R.id.answerThree);
@@ -67,6 +74,11 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 		storeOneB.setOnClickListener(this);
 		storeTwoB.setOnClickListener(this);
 
+		// 
+		questionNumber = 0;
+		enemy = new IntegralEnemy();
+		//
+		
 		startTimer();
 	}
 
@@ -103,19 +115,88 @@ public class Hackmu2012Activity extends Activity implements OnClickListener {
 	}
 	
 	public void choseAnswer(int answerChosen) {
-		
+		if(questionNumber < 4){
+			if(answerChosen == enemy.getProblems()[questionNumber].getAnswerID()){
+				player.setPoints(player.getPoints() + secondsLeft / 20 + 1);
+				questionNumber++;
+				
+				updateButtons();
+				
+				if(questionNumber == 4){
+					enemy = new TrigEnemy();
+					secondsLeft = enemy.getProblems()[0].getTime() * 10;
+				}
+				else{
+					secondsLeft = enemy.getProblems()[questionNumber].getTime() * 10;
+				}
+				
+				startTimer();
+				
+			}
+			else{
+				player.setPoints(player.getPoints() - 2);
+			}
+		}
+		else if(questionNumber < 7){
+			if(answerChosen == enemy.getProblems()[questionNumber - 4].getAnswerID()){
+				player.setPoints(player.getPoints() + secondsLeft/20 + 1);
+				questionNumber++;
+				
+				updateButtons();
+				
+				secondsLeft = enemy.getProblems()[questionNumber - 4].getTime() * 10;
+				if(secondsLeft > 0){
+					startTimer();
+				}
+			}
+			else{
+				player.setPoints(player.getPoints() - 2);
+			}
+		}
 	}
 	
 	public void purchasedHP() {
-		
+		player.setHP(player.getHP() + 5);
 	}
 	
+	///////////////////////////
+	// testing purposes only //
+	//      fix later        //
+	///////////////////////////
 	public void purchasedTime() {
 		gameOver();
 	}
+	
+	public void updateButtons(){
+		int problemNumber = questionNumber;
+		if(questionNumber >= 4){
+			problemNumber -= 4;
+		}
+		answerOneB.setText(enemy.getProblems()[problemNumber].getAnswer(0));
+		answerTwoB.setText(enemy.getProblems()[problemNumber].getAnswer(1));
+		answerThreeB.setText(enemy.getProblems()[problemNumber].getAnswer(2));
+		answerFourB.setText(enemy.getProblems()[problemNumber].getAnswer(3));
+		
+		question.setText(enemy.getProblems()[problemNumber].getQuestion());
+		
+	}
 
 	public void questionWrong(boolean timeExpired) {
-		secondsLeft = 150;
+		player.setHP(player.getHP() - 5); // lost lots of points for not being able to answer in time.
+		if(questionNumber < 4){
+			secondsLeft = enemy.getProblems()[questionNumber].getTime() * 10;
+			questionNumber++;
+			if(questionNumber == 4){
+				enemy = new TrigEnemy();
+			}
+			updateButtons();
+		}
+		else if(questionNumber < 7){
+			secondsLeft = enemy.getProblems()[questionNumber - 4].getTime() * 10;
+		}
+		else	{
+			secondsLeft = 100;
+		}
 		startTimer();
 	}
 	
